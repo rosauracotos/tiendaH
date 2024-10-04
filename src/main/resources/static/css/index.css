@@ -1,0 +1,59 @@
+.row.flex-nowrap {
+    overflow-x: auto; /* Habilita el desplazamiento horizontal */
+    white-space: nowrap; /* Para evitar que los elementos hagan un salto de línea */
+    scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
+.card {
+    display: inline-block; /* Para que los productos se mantengan en una fila */
+    margin-right: 15px; /* Espacio entre los productos */
+}
+
+.card-img-top {
+    object-fit: cover; /* Asegura que la imagen se ajuste bien */
+    height: 250px; /* Tamaño fijo para la imagen */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+h2 {
+    font-family: 'Playfair Display', serif; /* Fuente elegante para el título */
+    color: #2c3e50; /* Color del título */
+}
+
+.card-title {
+    font-family: 'Merriweather', serif;
+    font-size: 1.5rem;
+    color: #34495e;
+}
+
+.card-text {
+    font-size: 1.2rem;
+    color: #2ecc71;
+}
+
+.btn {
+    background-color: #5bc0de;
+    border: none;
+    padding: 10px 15px;
+}
+
+
+
+
+/* Estilo para las imágenes */
+#producto-imagen {
+    width: 100%; /* Asegura que la imagen ocupe el 100% del ancho de la tarjeta */
+    height: 250px; /* Define una altura específica para las imágenes */
+    object-fit: cover; /* Esto asegura que la imagen se escale correctamente y no se distorsione */
+}
+
+
+.table-container {
+    max-height: 900px; /* Ajusta la altura máxima */
+    overflow-y: auto;  /* Habilita el scroll vertical */
+    margin-top: 20px;
+}
+
+.table-container table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
+}
