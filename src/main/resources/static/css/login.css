@@ -1,0 +1,68 @@
+/* Estilos personalizados para la página de login */
+body {
+    background-color: #f7f7f7;
+    font-family: Arial, sans-serif;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-container p {
+    text-align: center;
+    color: #666;
+}
+
+.login-container img {
+    display: block;
+    margin: 0 auto 20px;
+    width: 120px;
+}
+
+.login-container .form-control {
+    border-radius: 30px;
+    padding: 0.75rem 1.5rem;
+}
+
+.login-container button[type="submit"] {
+    border-radius: 30px;
+    padding: 0.75rem;
+    font-weight: bold;
+    width: 100%;
+    background-color: #5bc0de;
+    color: white;
+    border: none;
+}
+
+.login-container button[type="submit"]:hover {
+    background-color: #4a9ebb;
+}
+
+.login-container a {
+    text-decoration: none;
+    color: #5bc0de;
+    font-weight: bold;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 20px;
+    top: 55%;
+    cursor: pointer;
+    color: #666;
+}

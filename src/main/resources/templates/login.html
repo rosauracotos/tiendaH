@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión - Pepuño</title>
+
+    <!-- Vincula tu archivo CSS personalizado para el login -->
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+
+    <!-- Enlace a Bootstrap y FontAwesome para íconos -->
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css}"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="login-container">
+    <h1>Iniciar sesión</h1>
+    <h2>¡Bienvenido a Pepuño.com!</h2>
+    <p>Ingresa tu usuario y contraseña para iniciar sesión</p>
+
+    <!-- Mensaje de error -->
+    <div id="alertMessage" class="alert" role="alert" style="display: none;"></div>
+
+    <form id="loginForm" onsubmit="handleLogin(event)">
+        <!-- Campo de Correo o DNI -->
+        <div class="mb-3 position-relative">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Correo o DNI*" required>
+        </div>
+
+        <!-- Campo de Contraseña con Ícono -->
+        <div class="mb-3 position-relative">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña*" required>
+            <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility()" style="position: absolute; right: 15px; top: 12px; cursor: pointer;"></i>
+        </div>
+
+        <!-- Botón de Enviar -->
+        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+
+        <!-- Enlace para crear cuenta -->
+        <div class="text-center mt-3">
+            <a href="/registro" th:href="@{/registro}" class="text-primary">Crear cuenta</a>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript para visibilidad de contraseña -->
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.querySelector('#password');
+        const passwordIcon = document.querySelector('.toggle-password');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            passwordIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+
+    // Maneja el envío del formulario de login
+    async function handleLogin(event) {
+        event.preventDefault(); // Evita el envío normal del formulario
+
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
+        const alertMessage = document.querySelector('#alertMessage');
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.text();
+
+            if (response.ok) {
+                // Redirige a la página principal en caso de éxito
+                window.location.href = result;
+            } else {
+                alertMessage.className = "alert alert-danger";
+                alertMessage.style.display = "block";
+                alertMessage.textContent = result;
+            }
+        } catch (error) {
+            alertMessage.className = "alert alert-danger";
+            alertMessage.style.display = "block";
+            alertMessage.textContent = "Error en la conexión. Inténtalo de nuevo.";
+        }
+    }
+</script>
+
+<!-- JavaScript para Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+3o1q8t13fYhZ7s5t5UjvI4fuW/B6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
