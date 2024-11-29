@@ -1,6 +1,7 @@
 package tiendaRopaHombre.Alpha.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import tiendaRopaHombre.Alpha.models.Cliente;
 import tiendaRopaHombre.Alpha.repository.ClienteRepository;
@@ -14,6 +15,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     public ArrayList<Cliente> obtenerClientes(){
         return (ArrayList<Cliente>) clienteRepository.findAll();
     }
@@ -23,8 +27,8 @@ public class ClienteService {
     }
 
     public  Cliente guardarCliente(Cliente cliente){
-        return clienteRepository.save(cliente);
-    }
+        cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
+        return clienteRepository.save(cliente);    }
 
     public Cliente editarCliente(Cliente cliente, Integer id){
         Optional<Cliente> clienteBDOpt = clienteRepository.findById(id);

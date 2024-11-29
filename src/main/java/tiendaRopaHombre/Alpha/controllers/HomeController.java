@@ -64,31 +64,6 @@ public class HomeController {
         return "login"; // Retorna la vista del formulario
     }
 
-    @PostMapping("/login")
-    @ResponseBody
-    public ResponseEntity<?> validarLogin(@RequestBody Map<String, String> loginData, HttpSession session) {
-        String email = loginData.get("email");
-        String password = loginData.get("password");
-
-        if (email == null || password == null) {
-            return ResponseEntity.badRequest().body("El email y la contraseña son obligatorios");
-        }
-
-        boolean esValido = clienteService.validarLogin(email, password);
-
-        if (esValido) {
-            // Obtén el nombre del cliente desde el servicio
-            Cliente cliente = clienteService.obtenerClientePorEmail(email);
-
-            // Guarda el nombre en la sesión
-            session.setAttribute("nombreUsuario", cliente.getNombre());
-
-            return ResponseEntity.ok().body("/");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
-        }
-    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
